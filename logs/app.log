@@ -1,0 +1,6 @@
+2021-11-17 16:00:15,213 - hit_analysis - INFO - Created Spark Session
+2021-11-17 16:00:15,213 - hit_analysis - INFO - File input path - /Users/mayursonawane/PycharmProjects/hit_analysis/doc/data.tsv
+2021-11-17 16:00:15,214 - hit_analysis - INFO - Hit Analysis object created
+2021-11-17 16:00:16,698 - hit_analysis - INFO - Initial Dataframe- 
+2021-11-17 16:00:16,698 - hit_analysis - INFO - DataFrame[hit_time_gmt: int, date_time: date, user_agent: string, ip: string, event_list: string, geo_city: string, geo_region: string, geo_country: string, pagename: string, page_url: string, product_list: string, referrer: string]
+2021-11-17 16:00:25,620 - hit_analysis - INFO - Output written to file path at - /Users/mayursonawane/PycharmProjects/hit_analysis/output
