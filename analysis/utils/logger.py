@@ -23,10 +23,3 @@ class Logger:
 
     def get_logger(self, name="app"):
         return logging.getLogger(name)
-
-# log = Logger().get_logger("abc")
-# log.info("abc")
-#
-# logging.basicConfig(filename='/Users/mayursonawane/PycharmProjects/hit_analysis/logs/app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
-# logger = logging.getLogger("app")
-# logger.warning('This will get logged to a file')
