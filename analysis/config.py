@@ -1,5 +1,6 @@
 # Config file
 
+# App config
 app_name = "hit_analysis"
 ip_file_path = "/Users/mayursonawane/PycharmProjects/hit_analysis/doc/data.tsv"
 op_file_path = "/Users/mayursonawane/PycharmProjects/hit_analysis/output"

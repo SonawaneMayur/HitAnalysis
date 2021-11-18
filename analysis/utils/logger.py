@@ -1,13 +1,21 @@
+"""
+    File name: logger.py
+    Author: Mayur Sonawane
+    Date Created: 11/14/2021
+    Date Updated: 11/16/2021
+    Python Version: 3.9
+    Description: Logger class
+"""
 import logging
 
 from analysis import config
 
 
 class Logger:
-    file_name = config.log_file_name  # '/Users/mayursonawane/PycharmProjects/hit_analysis/logs/app.log'
-    filemode = config.log_filemode  # 'w'
-    format = config.log_format  # '%(name)s - %(levelname)s - %(message)s'
-    level = config.log_level  # "INFO"
+    file_name = config.log_file_name
+    filemode = config.log_filemode
+    format = config.log_format
+    level = config.log_level
 
     def __init__(self):
         logging.basicConfig(filename=Logger.file_name, filemode=Logger.filemode, format=Logger.format,
