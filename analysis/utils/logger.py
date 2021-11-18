@@ -1,3 +1,11 @@
+"""
+    File name: logger.py
+    Author: Mayur Sonawane
+    Date Created: 11/14/2021
+    Date Updated: 11/16/2021
+    Python Version: 3.9
+    Description: Logger class
+"""
 import logging
 
 from analysis import config
