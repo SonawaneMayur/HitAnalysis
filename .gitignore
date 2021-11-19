@@ -1,13 +1,8 @@
 /doc
-/logs
 
 .venv
 /venv
 /.idea
-
-.DS_Store
-analysis/__pycache__/
-analysis/utils/__pycache__/
 
 .DS_Store
 analysis/__pycache__/
