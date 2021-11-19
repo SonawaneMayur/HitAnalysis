@@ -21,12 +21,13 @@ class Stats:
         logger = Logger().get_logger(cfg.app_name)
         try:
             # Fetch config
-            app_name = cfg.app_name  # str(sys.argv)[0]
+            app_name = cfg.app_name
+            #[TODO] - This config we can get as a sys arguments
             # input_file_path = cfg.ip_file_path  # str(sys.argv)[1]
-            output_file_path = cfg.op_file_path  # str(sys.argv)[2]
+            output_file_path = cfg.op_file_path  # str(sys.argv)[3]
 
             # Create Spark session
-            spark = SparkSession.builder.master("local[1]") \
+            spark = SparkSession.builder.master(cfg.master_url) \
                 .appName(app_name) \
                 .getOrCreate()
             logger.info("Created Spark Session")

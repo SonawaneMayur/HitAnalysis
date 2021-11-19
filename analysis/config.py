@@ -2,6 +2,7 @@
 
 # App config
 app_name = "HitAnalysis"
+master_url = "local[1]"
 op_file_path = "/Users/mayursonawane/PycharmProjects/HitAnalysis/output"
 
 # Logger config
