@@ -13,7 +13,7 @@ from pyspark.sql import DataFrame
 from pyspark.sql import functions as f
 from pyspark.sql.types import StructField, StructType, IntegerType, TimestampType, StringType
 
-class HitAnalysis:
+class Revenue:
     # The expected schema for Hit Analysis data
     SCHEMA = StructType([
         StructField("hit_time_gmt", IntegerType()),
@@ -32,8 +32,8 @@ class HitAnalysis:
 
     def __init__(self, spark):
         self.spark = spark
-        self.domainUDF = f.udf(lambda z: HitAnalysis.get_domain(z))
-        self.keywordUDF = f.udf(lambda z: HitAnalysis.get_keyword(z))
+        self.domainUDF = f.udf(lambda z: Revenue.get_domain(z))
+        self.keywordUDF = f.udf(lambda z: Revenue.get_keyword(z))
 
     @staticmethod
     def get_domain(url):
@@ -56,11 +56,11 @@ class HitAnalysis:
         return dt.now().strftime(date_format)
 
     def get_file_name(self):
-        return "{}_SearchKeywordPerformance.tab".format(HitAnalysis.get_date())
+        return "{}_SearchKeywordPerformance.tab".format(Revenue.get_date())
 
     def read_file(self, file_path):
         try:
-            return self.spark.read.csv(file_path, sep=r'\t', header=True, schema=HitAnalysis.SCHEMA)
+            return self.spark.read.csv(file_path, sep=r'\t', header=True, schema=Revenue.SCHEMA)
         except Exception:
             raise
 

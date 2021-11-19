@@ -11,7 +11,7 @@ import sys
 from pyspark.sql import SparkSession
 
 from analysis import config as cfg
-from analysis.revenue import HitAnalysis
+from analysis.revenue import Revenue
 from analysis.utils.logger import Logger
 
 
@@ -32,35 +32,35 @@ class Stats:
             logger.info("Created Spark Session")
             logger.info("File input path - {}".format(input_file_path))
             # Prepare the Revenue object
-            ha = HitAnalysis(spark)
+            rev = Revenue(spark)
             logger.info("Hit Analysis object created")
 
-            initial_df = ha.read_file(input_file_path)
+            initial_df = rev.read_file(input_file_path)
             logger.info("Initial Dataframe- ")
             logger.info(initial_df)
             # initial_df.show()
 
             # Calculate revenue logic
             # Explode product_list
-            products_df = ha.explode_products_list(initial_df)
+            products_df = rev.explode_products_list(initial_df)
 
             # Adding Total revenue column
-            products_total_rev_df = ha.add_total_revenue(products_df)
+            products_total_rev_df = rev.add_total_revenue(products_df)
 
             # Calculate total revenue by ip
-            purchase_df = ha.get_total_rev_by_ip(products_total_rev_df)
+            purchase_df = rev.get_total_rev_by_ip(products_total_rev_df)
 
             # Get external search engine except eshopzill
-            ext_domain_df = ha.get_ext_search_engine_except_esshopzilla(initial_df)
+            ext_domain_df = rev.get_ext_search_engine_except_esshopzilla(initial_df)
 
             # Get total revenue by domain
-            domain_rev_df = ha.get_domain_rev(ext_domain_df, purchase_df)
+            domain_rev_df = rev.get_domain_rev(ext_domain_df, purchase_df)
 
             # Get Search Query keywords and revenue by domain
-            result_df = ha.get_agg_keywords_rev(domain_rev_df)
+            result_df = rev.get_agg_keywords_rev(domain_rev_df)
             result_df.show()
 
-            ha.write_df(result_df, output_file_path)
+            rev.write_df(result_df, output_file_path)
 
             # # To write Spark Dataframe as .tsv file, first convert it into Pandas dataframe
             # pandas_df = ha.convert_to_pandas(result_df)

@@ -2,7 +2,6 @@
 
 # App config
 app_name = "HitAnalysis"
-ip_file_path = "/Users/mayursonawane/PycharmProjects/HitAnalysis/doc/data.tsv"
 op_file_path = "/Users/mayursonawane/PycharmProjects/HitAnalysis/output"
 
 # Logger config
