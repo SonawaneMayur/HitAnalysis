@@ -21,5 +21,14 @@ class Logger:
         logging.basicConfig(filename=Logger.file_name, filemode=Logger.filemode, format=Logger.format,
                             level=Logger.level)
 
+        # set up logging to console
+        console = logging.StreamHandler()
+        console.setLevel(logging.ERROR)
+        # set a format which is simpler for console use
+        formatter = logging.Formatter(Logger.format)
+        console.setFormatter(formatter)
+        # add the handler to the root logger
+        logging.getLogger('').addHandler(console)
+
     def get_logger(self, name="app"):
         return logging.getLogger(name)

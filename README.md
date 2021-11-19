@@ -26,7 +26,6 @@ EXECUTION -
 7. Use Databricks template to run app on Databricks with AWS backend
 8. Log file inside logs contains application logs to debug run
 
-
 Tags: 
 -----
 Python, Pyspark, GitHub, AWS, Databricks
