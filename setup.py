@@ -1,6 +1,5 @@
 import os
-
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 # Utility function to read the README file.
@@ -20,8 +19,8 @@ setup(
     license="BSD",
     keywords="hit revenue",
     url="https://github.com/SonawaneMayur/HitAnalysis",
-    packages=['analysis', 'tests'],
-    long_description=read('README'),
+    packages=find_packages(exclude=['*tests*']),
+    long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",

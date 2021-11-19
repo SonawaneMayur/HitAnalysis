@@ -9,15 +9,16 @@
 import re
 from datetime import datetime as dt
 
-from pyspark.sql import DataFrame
+
 from pyspark.sql import functions as f
-from pyspark.sql.types import StructField, StructType, IntegerType, TimestampType, StringType
+from pyspark.sql.types import StructField, StructType, IntegerType, DateType, StringType
+
 
 class HitAnalysis:
     # The expected schema for Hit Analysis data
     SCHEMA = StructType([
         StructField("hit_time_gmt", IntegerType()),
-        StructField("date_time", TimestampType()),
+        StructField("date_time", DateType()),
         StructField("user_agent", StringType()),
         StructField("ip", StringType()),
         StructField("event_list", StringType()),
@@ -55,7 +56,7 @@ class HitAnalysis:
     def get_date(date_format="%Y-%m-%d"):
         return dt.now().strftime(date_format)
 
-    def get_file_name(self):
+    def __get_file_name(self):
         return "{}_SearchKeywordPerformance.tab".format(HitAnalysis.get_date())
 
     def read_file(self, file_path):
@@ -69,12 +70,7 @@ class HitAnalysis:
 
     def write_df(self, df, file_path):
         try:
-            if isinstance(df, DataFrame):
-                df = df.toPandas()
-                # df.repartition(1).write.csv(path='{}/{}'.format(file_path, self.get_file_name()), mode='overwrite',
-                #                             header=True, sep='\t')
-
-            df.to_csv('{}/{}'.format(file_path, self.get_file_name()), sep='\t', index=False)
+            df.to_csv('{}/{}'.format(file_path, self.__get_file_name()), sep='\t', index=False)
         except Exception:
             raise
 
@@ -122,6 +118,6 @@ class HitAnalysis:
         return df.groupBy("Search Engine Domain") \
             .agg(
             f.concat_ws(" ", f.collect_set(df["Keyword"])).alias("Search Keyword"),
-            f.sum("total_revenue").alias("Revenue")
+            f.sum("total_revenue").alias("total_revenue")
         ) \
-            .orderBy("Revenue", ascending=False)
+            .orderBy("total_revenue", ascending=False)
