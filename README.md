@@ -23,7 +23,7 @@ EXECUTION -
 4. Before pushing code to GitHub, unit test it
 5. Push code to feature branch, which will get merge into master branch
 6. Use AWS cloud template to run app on AWS EMR
-7. Use Databricks template to run app on Databricks with AWS backend
+7. Use Databricks template to run app on Databricks with AWS backend (Multi Cloud)
 8. Log file inside logs contains application logs to debug run
 
 Tags: 
