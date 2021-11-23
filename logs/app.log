@@ -1,14 +1,14 @@
-2021-11-19 14:29:19,144 - HitAnalysis - INFO - Created Spark Session
-2021-11-19 14:29:19,144 - HitAnalysis - INFO - File input path - /Users/mayursonawane/PycharmProjects/HitAnalysis/doc/data.tsv
-2021-11-19 14:29:19,144 - HitAnalysis - INFO - Hit Analysis object created
-2021-11-19 14:29:20,587 - HitAnalysis - INFO - Initial Dataframe- 
-2021-11-19 14:29:20,587 - HitAnalysis - INFO - DataFrame[hit_time_gmt: int, date_time: timestamp, user_agent: string, ip: string, event_list: string, geo_city: string, geo_region: string, geo_country: string, pagename: string, page_url: string, product_list: string, referrer: string]
-2021-11-19 14:29:32,165 - HitAnalysis - INFO - Output written to file path at - /Users/mayursonawane/PycharmProjects/HitAnalysis/output
-2021-11-19 14:29:35,587 - HitAnalysis - INFO - Busy time of the day 
+2021-11-22 10:57:37,002 - HitAnalysis - INFO - Created Spark Session
+2021-11-22 10:57:37,003 - HitAnalysis - INFO - File input path - /Users/mayursonawane/PycharmProjects/HitAnalysis/doc/data.tsv
+2021-11-22 10:57:37,003 - HitAnalysis - INFO - Hit Analysis object created
+2021-11-22 10:57:38,858 - HitAnalysis - INFO - Initial Dataframe- 
+2021-11-22 10:57:38,858 - HitAnalysis - INFO - DataFrame[hit_time_gmt: int, date_time: timestamp, user_agent: string, ip: string, event_list: string, geo_city: string, geo_region: string, geo_country: string, pagename: string, page_url: string, product_list: string, referrer: string]
+2021-11-22 10:57:54,212 - HitAnalysis - INFO - Output written to file path at - /Users/mayursonawane/PycharmProjects/HitAnalysis/output
+2021-11-22 10:57:58,008 - HitAnalysis - INFO - Busy time of the day 
           Date  Hour  Page_Hits  Revenue_Generated
 0  2009-09-27     6         16              250.0
 1  2009-09-27     7          5              480.0
-2021-11-19 14:29:37,880 - HitAnalysis - INFO - Most visited pages 
+2021-11-22 10:58:00,909 - HitAnalysis - INFO - Most visited pages 
                  Page_Name  Hits
 0  Order Checkout Details     3
 1          Order Complete     3
@@ -20,21 +20,25 @@
 7                Hot Buys     1
 8    Ipod - Touch - 32 GB     1
 9            Zune - 32 GB     1
-2021-11-19 14:29:42,727 - HitAnalysis - INFO - Total Revenue and Number of customer's by Country, Region, City
+2021-11-22 10:58:06,457 - HitAnalysis - INFO - Total Revenue and Number of customer's by Country, Region, City
    Country Region            City  Total_Revenue  Number_of_Customer
 0      US     OR           Salem          290.0                   1
 1      US     NY       Rochester          250.0                   1
 2      US     OK          Duncan          190.0                   1
 3      US     UT  Salt Lake City            0.0                   1
-2021-11-19 14:29:45,275 - HitAnalysis - INFO - Potential Buyer's ip, who viewed product or added product into cart
+2021-11-22 10:58:09,856 - HitAnalysis - INFO - Potential Buyer's ip, who viewed product or added product into cart
    Potential_Buyer_ip
 0         44.12.96.2
 1         23.8.61.21
 2        67.98.123.1
-2021-11-19 14:29:50,465 - HitAnalysis - INFO - Number of customer's by Country, Region, City 
+2021-11-22 10:58:14,545 - HitAnalysis - INFO - Number of customer's by Country, Region, City 
    Country Region            City  Number_of_Customer
 0      US     OK          Duncan                   1
 1      US     OR           Salem                   1
 2      US     UT  Salt Lake City                   1
 3      US     NY       Rochester                   1
-2021-11-19 14:29:50,465 - HitAnalysis - INFO - Closing Application
+2021-11-22 10:58:18,083 - HitAnalysis - INFO - Total Revenue by product category
+   Product_Category  Total_Revenue
+0      Electronics          730.0
+1             None            0.0
+2021-11-22 10:58:18,083 - HitAnalysis - INFO - Closing Application

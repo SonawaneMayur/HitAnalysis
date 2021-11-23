@@ -8,6 +8,7 @@
 """
 import re
 from datetime import datetime as dt
+import csv
 
 from pyspark.sql import DataFrame
 from pyspark.sql import functions as f
@@ -100,7 +101,7 @@ class Revenue:
                         .withColumn("product_{}_custom_events".format(i), f.split(name, ";").getItem(4))
                         .withColumn("product_{}_merchandizing_evar".format(i), f.split(name, ";").getItem(5))
                         ).drop(name)
-        return products
+        return products, product_counts
 
     def add_total_revenue(self, df):
         return df.withColumn('total_revenue', sum(df[col] for col in df.columns if col.endswith("_total_revenue")))
@@ -125,3 +126,12 @@ class Revenue:
             f.sum("total_revenue").alias("Revenue")
         ) \
             .orderBy("Revenue", ascending=False)
+
+    def spark_to_csv(df, file_path):
+        """ Converts spark dataframe to CSV file """
+        fieldnames = df.columns
+        with open(file_path, "w") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writerow(dict(zip(fieldnames, fieldnames)))
+            for row in df.toLocalIterator():
+                writer.writerow(row.asDict())

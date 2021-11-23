@@ -8,7 +8,10 @@
     such as Google, Yahoo and MSN, and which keywords are performing the best based on revenue?
 """
 import sys
+import json
+
 from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType
 
 from analysis import config as cfg
 from analysis.revenue import Revenue
@@ -43,13 +46,15 @@ class Stats:
 
             # Calculate revenue logic
             # Explode product_list
-            products_df = rev.explode_products_list(initial_df)
+            products_df, products_count = rev.explode_products_list(initial_df)
 
             # Adding Total revenue column
             products_total_rev_df = rev.add_total_revenue(products_df)
+            products_total_rev_df.show(22)
 
             # Calculate total revenue by ip
             purchase_df = rev.get_total_rev_by_ip(products_total_rev_df)
+            purchase_df.show()
 
             # Get external search engine except eshopzill
             ext_domain_df = rev.get_ext_search_engine_except_esshopzilla(initial_df)
@@ -151,6 +156,33 @@ class Stats:
             cust_df.show()
             logger.info("Number of customer's by Country, Region, City \n {}".format(cust_df.toPandas()))
 
+            # Total Revenue by product category
+            print("=============Total Revenue by product category====================")
+            product_info_df = None
+            for cnt in range(0, products_count):
+                products_cat_cols = [s for s in products_total_rev_df.columns if 'product_{}_category'.format(cnt) in s]+['total_revenue']
+
+                prod_df = products_total_rev_df.select(*products_cat_cols)\
+                    .withColumnRenamed(products_cat_cols[0],"Product_Category")\
+                    .withColumnRenamed(products_cat_cols[1],"Total_Revenue")
+                if not product_info_df:
+                    schema_json = prod_df.schema.json()
+                    new_schema = StructType.fromJson(json.loads(schema_json))
+                    product_info_df = spark.createDataFrame([], new_schema)
+                product_info_df = product_info_df.union(prod_df)
+            product_info_df.show()
+            product_info_df.createOrReplaceTempView("PRODUCT_INFO")
+            rev_by_cat_df = spark.sql("""
+                                SELECT
+                                    distinct(Product_Category) as Product_Category,
+                                    SUM(coalesce(Total_Revenue, 0)) as Total_Revenue
+                                FROM PRODUCT_INFO
+                                    GROUP BY Product_Category
+                                    ORDER BY Total_Revenue desc
+                                    """)
+            rev_by_cat_df.show()
+            logger.info(
+                "Total Revenue by product category\n {}".format(rev_by_cat_df.toPandas()))
 
         except Exception as e:
             logger.error("Analyzing Hit data Failed Due To - {}".format(e))
