@@ -127,11 +127,11 @@ class Revenue:
         ) \
             .orderBy("Revenue", ascending=False)
 
-    def spark_to_csv(df, file_path):
+    def spark_to_csv(self, df, file_path):
         """ Converts spark dataframe to CSV file """
         fieldnames = df.columns
-        with open(file_path, "w") as f:
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
+        with open('{}/{}'.format(file_path, self.get_file_name()), "w") as f:
+            writer = csv.DictWriter(f, delimiter="\t", fieldnames=fieldnames)
             writer.writerow(dict(zip(fieldnames, fieldnames)))
             for row in df.toLocalIterator():
                 writer.writerow(row.asDict())

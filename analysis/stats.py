@@ -66,7 +66,8 @@ class Stats:
             result_df = rev.get_agg_keywords_rev(domain_rev_df)
             result_df.show()
 
-            rev.write_df(result_df, output_file_path)
+            # rev.write_df(result_df, output_file_path)
+            rev.spark_to_csv(result_df, output_file_path)
 
             # # To write Spark Dataframe as .tsv file, first convert it into Pandas dataframe
             # pandas_df = ha.convert_to_pandas(result_df)
